@@ -1,148 +1,148 @@
-# AI 辅助求职工作流（Human-in-the-loop）
+# AI-Assisted Job Search Workflow (Human-in-the-loop)
 
-> 一套「AI 负责广度和记录，人负责判断和投递」的求职流程。
-> 工具组合：Claude（对话 + 定时任务）、Gmail（岗位提醒邮件）、Notion（岗位库 / 简历库 / 面试库）。
-> 目标岗位：Product Manager / Product Owner 为主，Business Analyst 次之；悉尼。
+English | [中文](README.zh-CN.md)
 
-**English summary:** An AI-assisted, human-in-the-loop job search pipeline. Claude localises the resume for the Australian market, screens 20 fresh roles every morning from LinkedIn alerts, Seek and Indeed, scores them like an HR first-pass screen, and logs them to Notion. I review every pick; my keep/delete decisions are turned into written rules that tighten the next day's screening. For roles I choose, Claude tailors the resume and cover letter from a single master resume, and I edit and submit myself. Claude records every status change and a weekly review tracks response rates by role type and resume version.
+> A job search process where AI handles breadth and record-keeping, and I make the judgement calls and submit every application myself.
+> Tools: Claude (conversation + scheduled tasks), Gmail (job alert emails), Notion (job tracker / resume library / interview log).
+> Target roles: Product Manager / Product Owner first, Business Analyst second; Sydney.
 
 ---
 
-## 总览
+## Overview
 
 ```
- ① 定位 & 母版简历 ──► ② 每日 AI 选岗 + 打分 ──► ③ 人工复核 ──► ④ 定制材料 & 投递 ──► ⑤ 跟进 & 每周复盘
-        ▲                       ▲                     │                                        │
-        │                       └──── 筛选规则更新 ◄───┘                                        │
-        └──────────────────────────── 简历/方向调整 ◄────────────────────────────────────────────┘
+ ① Positioning & master resume ──► ② Daily AI screening + scoring ──► ③ Human review ──► ④ Tailor & apply ──► ⑤ Follow-up & weekly review
+            ▲                                  ▲                              │                                        │
+            │                                  └────── screening rules ◄──────┘                                        │
+            └───────────────────────────────── resume / direction adjustments ◄────────────────────────────────────────┘
 ```
 
-和最初的四步相比，这版做了三处优化：
+Compared with my original four-step process, this version makes three improvements:
 
-1. **先定位再找岗**：在开始找岗前，先把目标方向、薪资、硬性排除条件写清楚，AI 打分有据可依，而不是“看着像就推”。
-2. **人工复核变成规则**：每次删除或保留一个岗位都说一句原因，AI 把原因沉淀成书面规则，下次直接按规则筛，精准度会越用越高。
-3. **加了闭环**：投递后有跟进提醒和每周复盘，用“哪类岗位、哪版简历回复率高”来反过来调整方向和简历。
-
----
-
-## ① 定位 & 母版简历（一次性，之后按需更新）
-
-**我做什么**
-- 和 Claude 对话，把过往经历逐段讲清楚：做了什么、我负责什么、结果数字是多少。
-- 确认求职方向的优先级、薪资预期、能接受的合同形式。
-
-**Claude 做什么**
-- 整理出一份**母版简历（事实库）**：所有经历、项目、数据都在这里，之后所有定制版本只从母版里挑和改写，不凭空新增。
-- 把海外（国内互联网）简历**转成澳洲适配格式**：
-  - 2 页以内，倒序时间线，不放照片、年龄、婚姻状况等信息。
-  - 每条 bullet 用「动作 + 范围 + 量化结果」写法，例如“上传流程从 5 步缩到 3 步，日均 UGC +46%”。
-  - 给本地 HR 不熟悉的公司加一句背景（如公司规模、产品用户量），让经历的分量看得懂。
-  - 统一用澳式英语拼写（optimise、organisation 等），头部写清楚工作权利（无需担保）。
-  - 简历、LinkedIn、求职信的职位名称和时间线保持一致。
-- 按方向维护几个**分支版本**：PM/增长、社区运营、中文社媒营销、零售兼职等。
-
-**产出**：母版简历 + 各方向分支版本，存在 Notion「简历库」。
+1. **Positioning before searching.** Target roles, salary range and hard exclusions are written down before any search starts, so the AI scores against clear criteria instead of "this looks close enough".
+2. **Human review becomes rules.** Every time I keep or delete a role, I give a one-line reason. The AI turns those reasons into written screening rules, so precision improves the more the system is used.
+3. **A closed loop.** Applications get follow-up reminders and a weekly review. Response rates by role type and resume version feed back into my direction and my resume.
 
 ---
 
-## ② 每日 AI 选岗 + 打分（自动，每天早上）
+## ① Positioning & master resume (one-off, updated as needed)
 
-**来源**
-| 来源 | 获取方式 | 每日数量 |
+**What I do**
+- Walk Claude through each past role: what I did, what I owned, and the measurable results.
+- Confirm role priorities, salary expectations and acceptable contract types.
+
+**What Claude does**
+- Builds a **master resume (fact base)** holding every role, project and metric. All tailored versions are selected and rewritten from it; nothing new is invented.
+- **Localises my overseas (China tech) resume for the Australian market:**
+  - Two pages maximum, reverse-chronological, no photo, age or marital status.
+  - Every bullet follows "action + scope + quantified result", e.g. "Cut the upload flow from 5 steps to 3, lifting daily UGC by 46%".
+  - Adds one line of context for companies local recruiters may not know (company scale, product user base) so the experience reads at its true weight.
+  - Australian English spelling (optimise, organisation, etc.) and a clear work rights statement (no sponsorship required) in the header.
+  - Job titles and dates kept consistent across resume, LinkedIn and cover letters.
+- Maintains **branch versions** per direction: PM/growth, community management, Chinese social media marketing, retail part-time, and so on.
+
+**Output:** master resume plus branch versions, stored in the Notion resume library.
+
+---
+
+## ② Daily AI screening + scoring (automated, every morning)
+
+**Sources**
+| Source | How roles are collected | Picks per day |
 |---|---|---|
-| LinkedIn | 读取 LinkedIn Job Alert 邮件（按 PM / PO / BA 等多个方向订阅） | 10 |
-| Seek / Indeed | Seek 推荐邮件 + Indeed 站内搜索 | 10 |
+| LinkedIn | LinkedIn Job Alert emails (subscribed for PM / PO / BA and related roles) | 10 |
+| Seek / Indeed | Seek recommendation emails + Indeed search | 10 |
 
-两组互不重复，同一岗位只出现一次。
+The two groups never overlap; each role appears only once.
 
-**硬性筛选（直接不选）**
-- 发布超过 2 周，或已下架。
-- 要求带团队 / 管理下属。
-- 深度机器学习、RAG、模型微调等工程岗。
-- 指定我没用过的工具，或要求银行、医疗、汽车等行业多年经验或执照。
-- 偏执行传话、只做交付协调、不接触业务决策的“伪 PM”岗。
+**Hard filters (never picked)**
+- Posted more than 2 weeks ago, or already taken down.
+- Requires managing a team or direct reports.
+- Deep machine learning, RAG or model fine-tuning engineering roles.
+- Names specific tools I haven't used, or requires multiple years in banking, healthcare or automotive, or a professional licence.
+- "PM in name only" roles that relay tasks or coordinate delivery without real business ownership.
 
-**打分（模拟 HR 初筛，满分 100）**
-| 维度 | 权重 | 看什么 |
+**Scoring (modelled on an HR first-pass screen, out of 100)**
+| Dimension | Weight | What it looks at |
 |---|---|---|
-| 背景相关度 | 35 | JD 核心职责和我经历的重合度（产品增长、创作者/社区、AI 产品、数据驱动） |
-| 公司发展 | 20 | 公司阶段、融资/增长情况、团队稳定性 |
-| 我的竞争力 | 25 | 硬性要求满足程度、年限匹配、有无明显短板 |
-| 新鲜度 | 20 | 发布时间越近越高，申请人数越少越高 |
+| Background relevance | 35 | Overlap between core JD responsibilities and my experience (product growth, creator/community products, AI products, data-driven decisions) |
+| Company growth | 20 | Company stage, funding/growth, team stability |
+| Competitiveness | 25 | How well I meet the hard requirements, years of experience, any obvious gaps |
+| Freshness | 20 | More recent postings and fewer applicants score higher |
 
-低于 65 分不进库。**宁缺毋滥**：当天合格的不够 10 个，就只推合格的。
+Roles scoring below 65 are not added. **Quality over quantity:** if fewer than 10 roles qualify on a given day, only the qualifying ones are added.
 
-**写入 Notion「岗位投递库」**，每条包含：岗位、公司、地点、薪资、链接、发布日期、来源、匹配分、优势分析、差距建议、推荐用哪版简历、一句话结论，状态为「待评估」。
-
----
-
-## ③ 人工复核（我每天花 10 分钟）
-
-**我做什么**
-- 浏览当天的「待评估」岗位，每条做一个决定：
-  - **想投** → 改状态或直接在对话里告诉 Claude。
-  - **不合适** → 删除，并顺口说一句原因（比如“这个其实是交付协调”“要求 5 年金融经验”）。
-
-**Claude 做什么**
-- 删除的岗位以后不再推荐。
-- 把我给的原因**写成新的筛选规则**，加进上面的硬性筛选或打分标准里。这一步就是“用 prompt 优化 AI 筛选精准度”的具体做法：不是笼统地说“推准一点”，而是每条反馈都变成一条可执行的规则。
-- 每周统计一次**精准率**（我保留的岗位 / 推荐总数），看规则调整有没有效果。
+**Written to the Notion job tracker**, each with: title, company, location, salary, link, posting date, source, match score, strengths, gaps and advice, recommended resume version, a one-line verdict, and status "To review".
 
 ---
 
-## ④ 定制材料 & 投递
+## ③ Human review (about 10 minutes a day)
 
-**我做什么**
-- 选定岗位后，把完整 JD 贴给 Claude（LinkedIn / Seek 页面 AI 打不开，需要我复制）。
-- 审阅、修改 Claude 给的初稿，最后**由我自己投递**。
+**What I do**
+- Go through the day's "To review" roles and decide on each one:
+  - **Want to apply** → change the status, or tell Claude in the chat.
+  - **Not a fit** → delete it, with a one-line reason (e.g. "this is really delivery coordination", "needs 5 years in finance").
 
-**Claude 做什么**
-- 拆解 JD：列出关键词、硬性要求、隐性期待，对照母版简历标出“已覆盖 / 需要强调 / 真实短板”。
-- 从母版简历生成定制版简历和求职信，只重新排序和改写已有事实，不编造经历。
-- 起草网申问题的回答（如 why us、相关经历举例），复用已打磨过的故事素材。
-- 把定稿存入「简历库」，并和对应岗位关联。
-
-**原则**：Claude 永远不代我投递、不代我发邮件、不索要任何账号密码。
+**What Claude does**
+- Never recommends a deleted role again.
+- **Turns my reasons into new screening rules** and adds them to the hard filters or scoring criteria. This is how prompt refinement improves screening precision in practice: not a vague "be more accurate", but every piece of feedback becoming an actionable rule.
+- Tracks **precision** weekly (roles I keep ÷ roles recommended) to see whether rule changes are working.
 
 ---
 
-## ⑤ 跟进 & 每周复盘
+## ④ Tailor materials & apply
 
-**自动记录（Claude）**
-- 我说“投了”，Claude 就在岗位库里把状态改为「已投递」、填上投递日期和所用简历版本。
-- 投递约 7–10 天无回音时提醒我跟进（例如 LinkedIn 私信招聘负责人）。
-- 进入面试后，在「面试记录库」整理面试轮次、准备要点和可能的追问。
+**What I do**
+- For a chosen role, paste the full JD to Claude (the AI can't open LinkedIn / Seek pages directly).
+- Review and edit Claude's drafts, then **submit the application myself**.
 
-**每周复盘（一起做）**
-- 本周：推荐数、保留数、投递数、回复数、面试数。
-- 按岗位方向和简历版本看回复率，回复率低的方向或版本做调整，反馈回第 ① 步和第 ② 步。
+**What Claude does**
+- Breaks down the JD into keywords, hard requirements and implicit expectations, and maps them against the master resume as "covered / needs emphasis / genuine gap".
+- Generates a tailored resume and cover letter from the master resume, only reordering and rewording existing facts, never inventing experience.
+- Drafts answers to application questions (why this company, relevant examples), reusing refined story material.
+- Saves the final versions to the resume library and links them to the role.
+
+**Principle:** Claude never submits applications or sends emails on my behalf, and never asks for any account password.
 
 ---
 
-## Notion 结构
+## ⑤ Follow-up & weekly review
 
-| 数据库 | 用途 |
+**Automatic record-keeping (Claude)**
+- When I say "applied", Claude sets the status to "Applied" and records the date and resume version used.
+- Reminds me to follow up after 7–10 days without a response (e.g. a LinkedIn message to the hiring contact).
+- Once interviews start, logs rounds, prep notes and likely follow-up questions in the interview log.
+
+**Weekly review (together)**
+- This week: roles recommended, kept, applied, responses, interviews.
+- Response rate by role type and resume version; directions or versions with low response rates are adjusted and fed back into steps ① and ②.
+
+---
+
+## Notion structure
+
+| Database | Purpose |
 |---|---|
-| 岗位投递库 | 所有岗位；状态：待评估 → 已投递 → 面试中 → Offer / 已拒 |
-| 简历库 | 母版简历、各方向分支版本、每个岗位的定制简历和求职信 |
-| 面试记录库 | 面试轮次、问题、复盘 |
+| Job tracker | All roles; status: To review → Applied → Interviewing → Offer / Rejected |
+| Resume library | Master resume, branch versions, and the tailored resume and cover letter for each role |
+| Interview log | Interview rounds, questions, reflections |
 
 ---
 
-## 我让 Claude 做过的事（清单）
+## What I've had Claude do
 
-- 梳理过往经历，整理母版简历，转成澳洲格式，并维护 8 个分支版本（PM/增长、社区运营、品牌口碑、中文数字传播、汽车社区、短视频营销、零售兼职、通用版）。
-- 搭建 Notion 求职追踪系统（岗位库、简历库、面试库），并加了发布日期、来源、推荐简历、一句话结论等字段。
-- 设置每日 7:52（悉尼时间）的定时选岗任务：LinkedIn 10 个 + Seek/Indeed 10 个，按 HR 初筛逻辑打分入库。
-- 根据我的反馈，持续更新筛选规则（只要懂业务的 PM 岗、只要 2 周内仍在招、低于 65 分或硬性要求不符直接删除且不再推荐）。
-- 指导我自己完成 LinkedIn 邮箱和岗位提醒设置，让提醒邮件能被自动读取。
-- 针对具体岗位定制简历、求职信和网申问答，并准备面试追问。
-- 记录投递进度和后续跟进事项。
+- Mapped out my past experience, built the master resume, localised it for Australia, and maintained 8 branch versions (PM/growth, community management, brand reputation, Chinese digital communications, automotive community, short-video marketing, retail part-time, general).
+- Built the Notion job-tracking system (job tracker, resume library, interview log), adding fields for posting date, source, recommended resume and one-line verdict.
+- Set up a daily 7:52am (Sydney time) scheduled screening task: 10 LinkedIn + 10 Seek/Indeed roles, scored HR-style and added to the tracker.
+- Continuously updated the screening rules from my feedback (only PM roles with real business ownership, only roles posted within 2 weeks and still open, delete and never re-suggest roles under 65 or with unmet hard requirements).
+- Guided me through setting up my LinkedIn email and job alerts myself, so alert emails can be read automatically.
+- Tailored resumes, cover letters and application answers for specific roles, and prepared interview follow-up questions.
+- Recorded application progress and follow-up actions.
 
 ---
 
-## 可以继续优化的方向
+## Next improvements
 
-- **故事库**：把常用的 STAR 案例（如创作者工具上传流程优化、AI 地产搜索产品从 0 到 1）单独成表，网申和面试都直接调用。
-- **公司观察名单**：对特别想去的公司，不等岗位提醒，定期查官网招聘页。
-- **技能补短板**：复盘中反复出现的短板（如 SEO、GA4）列成学习计划，补完后更新母版简历。
+- **Story bank:** keep frequently used STAR examples (e.g. the creator-tool upload flow redesign, the 0-to-1 AI property search product) in their own table, ready for applications and interviews.
+- **Company watchlist:** for companies I especially want to join, check their careers pages regularly instead of waiting for alerts.
+- **Closing skill gaps:** turn gaps that keep showing up in reviews (e.g. SEO, GA4) into a learning plan, and update the master resume once they're covered.
