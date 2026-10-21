@@ -8,6 +8,26 @@ English | [中文](README.zh-CN.md)
 
 ---
 
+## What's new in v2 (Oct 2026)
+
+v1 got roles into the tracker. v2 focuses on what happens after: tailoring faster, staying truthful, and keeping the system usable as it grows.
+
+1. **One master resume, no drift.** Every tailored resume is now built from a single master (fact base), never from the last tailored copy. When new facts are confirmed, the master is re-baselined so outdated wording can't creep back in.
+2. **Ask before you write.** If a new phrase isn't something I've confirmed, the AI asks first and only edits after I approve. It also keeps a "not claimed" list (skills I haven't used or levels I don't have), so applications stay honest.
+3. **JD-mirrored bullets.** Each bullet in the most recent role starts with the JD's own heading (e.g. Requirements gathering, Process improvement, Stakeholder management) and is framed in Australian capability modules: requirements/user stories, stakeholder alignment, prioritisation, AS-IS → TO-BE, UAT.
+4. **Salary guidance on every evaluation.** Each role gets a recommended ask and a market range (and a day rate for contracts), plus a list of gaps and questions to confirm before tailoring.
+5. **A reusable story bank.** Confirmed interview stories (e.g. low adoption → finding the real problem → redesign; accuracy vs speed vs cost trade-off) are reused across application questions in Problem → My Role → Key Decision → Outcome format.
+6. **Cleaner Notion records.**
+   - Rows are looked up by link or ID instead of keyword search, which missed entries.
+   - The AI never creates duplicate rows or touches pipeline-owned columns.
+   - Each application entry stores the form answers and salary bracket chosen, ready for interview prep.
+7. **Expired-posting check.** When a listing disappears, the AI checks the company's careers page for a re-titled repost before marking it closed.
+8. **Lighter context, lower cost.** Long chats get expensive, so the setup is split: rules live in a reusable skill, facts in memory, records in Notion, and files in a small starter pack uploaded at the start of each new chat. No RAG needed: the data is small and already structured, so exact lookups beat similarity search.
+
+**Result:** 14 tailored applications (resume, cover letter and form answers) across PM, PO, BA and AI roles in three days, each with a 2-page PDF check before submission.
+
+---
+
 ## Overview
 
 ```
@@ -143,6 +163,6 @@ Roles scoring below 65 are not added. **Quality over quantity:** if fewer than 1
 
 ## Next improvements
 
-- **Story bank:** keep frequently used STAR examples (e.g. the creator-tool upload flow redesign, the 0-to-1 AI property search product) in their own table, ready for applications and interviews.
+- **Story bank (✅ started in v2):** keep frequently used STAR examples (e.g. the creator-tool upload flow redesign, the 0-to-1 AI property search product) in their own table, ready for applications and interviews.
 - **Company watchlist:** for companies I especially want to join, check their careers pages regularly instead of waiting for alerts.
 - **Closing skill gaps:** turn gaps that keep showing up in reviews (e.g. SEO, GA4) into a learning plan, and update the master resume once they're covered.
